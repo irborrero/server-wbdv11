@@ -20,6 +20,18 @@ public class CourseController {
         return service.findAllCourses();
     }
 
+
+    @GetMapping("/api/courses/{courseId}")
+    public Course findCourseById(@PathVariable("courseId") String courseId) {
+        return service.findCourseById(courseId);
+    }
+
+
+    @PostMapping("/api/courses")
+    public Course createCourse(@RequestBody Course newCourse) {
+        return service.createCourse(newCourse);
+    }
+
 }
  /*
 package com.example.myapp.controllers;

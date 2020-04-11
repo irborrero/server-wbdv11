@@ -1,83 +1,28 @@
 package com.example.springbootserver.models;
-
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Course {
-}
-
-/*
-package com.example.myapp.models;
-
-        import com.fasterxml.jackson.annotation.JsonIgnore;
-
-        import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-@Table (name="Widgets")
-public class Widget {
+@Table (name = "Courses")
+public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @JsonIgnore
-    @ManyToOne
-    private Topic topic;
+    private String id;
 
     private String name;
 
-    private String type;
+    private String description;
 
-    private Integer position;
 
-    private String text;
-
-    private String src;
-
-    private Integer size;
-
-    private Integer width;
-
-    private Integer height;
-
-    private String cssClass;
-
-    private String style;
-
-    private String value;
-
-    //CONSTRUCTOR
-    public Widget() {
-    }
-
-    public Widget(Integer id, String name, String type) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-    }
-
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
-
-    public Integer getPosition() {
-        return position;
-    }
-
-    public void setPosition(Integer position) {
-        this.position = position;
     }
 
     public String getName() {
@@ -88,79 +33,12 @@ public class Widget {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getDescription() {
+        return description;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getSrc() {
-        return src;
-    }
-
-    public void setSrc(String src) {
-        this.src = src;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public String getCssClass() {
-        return cssClass;
-    }
-
-    public void setCssClass(String cssClass) {
-        this.cssClass = cssClass;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
 }
-
- */
 
