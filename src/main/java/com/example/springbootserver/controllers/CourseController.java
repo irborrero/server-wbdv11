@@ -26,6 +26,11 @@ public class CourseController {
         return service.findCourseById(courseId);
     }
 
+    @PutMapping("/api/courses/{courseId}")
+    public int updateWidget(@PathVariable("courseId") String courseId, @RequestBody Course updatedCourse) {
+        return service.updateCourse(courseId, updatedCourse);
+    }
+
 
     @PostMapping("/api/courses")
     public Course createCourse(@RequestBody Course newCourse) {
