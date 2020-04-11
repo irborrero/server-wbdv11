@@ -16,6 +16,14 @@ public class CourseService {
     public List<Course> findAllCourses() {
         return courseRepository.findAllCourses();
     }
+
+    public Course findCourseById(String courseId) {
+        return courseRepository.findCourseById(courseId);
+    }
+
+    public Course createCourse(Course newCourse) {
+        return courseRepository.save(newCourse);
+    }
 }
 
 /*
