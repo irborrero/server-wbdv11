@@ -24,6 +24,13 @@ public class CourseService {
     public Course createCourse(Course newCourse) {
         return courseRepository.save(newCourse);
     }
+
+    public int updateCourse(String courseId, Course updatedCourse) {
+        if(updatedCourse == null)
+            return 0;
+        courseRepository.save(updatedCourse);
+        return 1;
+    }
 }
 
 /*
