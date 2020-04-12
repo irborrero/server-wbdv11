@@ -20,6 +20,7 @@ public class UserController {
     public User register(
             HttpSession session,
             @RequestBody User user) {
+        user.setValidated(Boolean.FALSE);
         User newUser = repository.save(user);
         newUser.setPassword("***");
         session.setAttribute("profile", newUser);
