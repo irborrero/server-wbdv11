@@ -31,4 +31,24 @@ public class UserController {
         profile.setPassword("***");
         return profile;
     }
+    @PostMapping("/logout")
+    public void logout(HttpSession session) {
+        session.invalidate();
+    }
+    @PostMapping("/login")
+    public User login(
+            HttpSession session,
+            @RequestBody User user) {
+
+        try {
+            User currentUser = repository.findUserByCredentials(user.getName(), user.getPassword());
+            currentUser.setPassword("***");
+            session.setAttribute("profile", currentUser);
+            return currentUser ;
+        } catch (java.lang.NullPointerException e){
+            return user;
+        }
+
+
+    }
 }
