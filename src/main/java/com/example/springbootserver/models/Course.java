@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table (name = "Courses")
@@ -15,6 +16,9 @@ public class Course {
     private String name;
 
     private String description;
+
+    @OneToMany(mappedBy = "course")
+    private List<Topic> topics;
 
 
     public String getId() {
@@ -39,6 +43,14 @@ public class Course {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 }
 
