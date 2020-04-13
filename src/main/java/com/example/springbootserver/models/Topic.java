@@ -3,6 +3,7 @@ package com.example.springbootserver.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Topics")
@@ -17,6 +18,9 @@ public class Topic {
     @JsonIgnore
     @ManyToOne
     private Course course;
+
+    @OneToMany(mappedBy = "topic")
+    private List<Discussion> discussions;
 
     public Integer getId() {
         return id;
@@ -40,5 +44,13 @@ public class Topic {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public List<Discussion> getDiscussions() {
+        return discussions;
+    }
+
+    public void setDiscussions(List<Discussion> discussions) {
+        this.discussions = discussions;
     }
 }

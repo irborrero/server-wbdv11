@@ -22,17 +22,14 @@ public class TopicController {
         return service.findAllTopics();
     }
 
-    @PostMapping("/api/topics")
-    public Topic createTopic(@RequestBody Topic newTopic) {
-        return service.createTopic(newTopic);
+    @PostMapping("/api/courses/{courseId}/topics")
+    public Topic createTopic(@PathVariable("courseId") String courseId, @RequestBody Topic newTopic) {
+        return service.createTopic(newTopic, courseId);
     }
-
-    /*
 
     @GetMapping("/api/courses/{courseId}/topics")
     public List<Topic> findTopicsForCourse(@PathVariable("courseId") String courseId) {
-        return service.findCourseById(courseId);
+        return service.findTopicsForCourse(courseId);
     }
-   */
 
 }
