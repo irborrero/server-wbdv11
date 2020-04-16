@@ -14,11 +14,11 @@ public class Discussion {
 
     private String title;
 
-    @JsonIgnore
+    private String body;
+
     @ManyToOne
     private Topic topic;
 
-    @JsonIgnore
     @ManyToOne
     private  User user;
 
@@ -52,5 +52,13 @@ public class Discussion {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }
