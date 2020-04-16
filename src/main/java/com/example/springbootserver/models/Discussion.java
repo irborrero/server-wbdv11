@@ -16,11 +16,9 @@ public class Discussion {
 
     private String body;
 
-    @JsonIgnore
     @ManyToOne
     private Topic topic;
 
-    @JsonIgnore
     @ManyToOne
     private  User user;
 

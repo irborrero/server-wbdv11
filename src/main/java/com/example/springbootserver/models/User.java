@@ -1,5 +1,8 @@
 package com.example.springbootserver.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -9,11 +12,14 @@ public class User {
     private Integer id;
     private String name;
     private String password;
-    //private String firstName;
     private String lastName;
     private String email;
     private String userType;
     private Boolean validated;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Discussion> discussions;
 
     public String getEmail() {
         return email;
@@ -63,14 +69,6 @@ public class User {
         this.password = password;
     }
 
-//    public String getFirstName() {
-//        return firstName;
-//    }
-//
-//    public void setFirstName(String firstName) {
-//        this.firstName = firstName;
-//    }
-
     public String getName() {
         return name;
     }
@@ -79,4 +77,11 @@ public class User {
         this.name = name;
     }
 
+    public List<Discussion> getDiscussions() {
+        return discussions;
+    }
+
+    public void setDiscussions(List<Discussion> discussions) {
+        this.discussions = discussions;
+    }
 }

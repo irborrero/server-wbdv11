@@ -19,6 +19,7 @@ public class Topic {
     @ManyToOne
     private Course course;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "topic")
     private List<Discussion> discussions;
 
