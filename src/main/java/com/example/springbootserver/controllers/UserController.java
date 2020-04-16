@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://project-react-client-t11.herokuapp.com", allowCredentials = "true")
+@CrossOrigin(origins = "https://localhost:3000", allowCredentials = "true")
 public class UserController {
     @Autowired
     UserService service;
