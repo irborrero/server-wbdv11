@@ -1,9 +1,11 @@
 package com.example.springbootserver.controllers;
 
 import com.example.springbootserver.models.Course;
+import com.example.springbootserver.models.Event;
 import com.example.springbootserver.models.User;
 import com.example.springbootserver.repositories.UserRepository;
 import com.example.springbootserver.services.CourseService;
+import com.example.springbootserver.services.EventService;
 import com.example.springbootserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +15,14 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
     @Autowired
     UserService service;
+
+    @Autowired
+    EventService eventService;
+
     @PostMapping("/register")
     public User register(
             HttpSession session,
@@ -44,7 +50,7 @@ public class UserController {
 
         try {
             User currentUser = service.findUserByCredentials(user.getName(), user.getPassword());
-            currentUser.setPassword("***");
+            //currentUser.setPassword("***");
             session.setAttribute("profile", currentUser);
             return currentUser ;
         } catch (java.lang.NullPointerException e){
@@ -64,4 +70,19 @@ public class UserController {
         service.updateUnvalidateFaculty(userId);
     }
 
+
+    @PostMapping("/users/events/")
+    public void saveEvent(HttpSession session, @RequestBody Event newEvent) {
+        User profile = (User)session.getAttribute("profile");
+        eventService.insertEvent(newEvent);
+        profile.getEvents().add(newEvent);
+        service.save(profile);
+    }
+
+    @GetMapping("/users/events/")
+    public List<Event> findEventsForUser(HttpSession session) {
+        User profile = (User)session.getAttribute("profile");
+        return  service.findEventsForUser(profile.getId());
+
+    }
 }

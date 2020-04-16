@@ -1,12 +1,15 @@
 package com.example.springbootserver.services;
 
 import com.example.springbootserver.models.Course;
+import com.example.springbootserver.models.Event;
 import com.example.springbootserver.models.User;
 import com.example.springbootserver.repositories.CourseRepository;
 import com.example.springbootserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,4 +43,13 @@ public class UserService {
     public void updateUnvalidateFaculty(int userId){
         repository.updateUnvalidateFaculty(userId);
     }
+
+    public List<Event> findEventsForUser(int userId){
+        List<Object> list = repository.findEventsForUser(userId);
+        List<Event> events = new ArrayList<>();
+        for(Object event: list){
+            events.add((Event) event);
+        }
+        return  events;
+    };
 }

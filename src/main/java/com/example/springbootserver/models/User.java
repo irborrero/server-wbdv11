@@ -2,7 +2,9 @@ package com.example.springbootserver.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -20,6 +22,17 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Discussion> discussions;
+
+    @JsonIgnore
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "user_events",
+            joinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "event_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    private Set<Event> events = new HashSet<>();
 
     public String getEmail() {
         return email;
@@ -84,4 +97,13 @@ public class User {
     public void setDiscussions(List<Discussion> discussions) {
         this.discussions = discussions;
     }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
 }
