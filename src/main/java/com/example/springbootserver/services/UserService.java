@@ -1,19 +1,19 @@
 package com.example.springbootserver.services;
 
-import com.example.springbootserver.models.Course;
 import com.example.springbootserver.models.Event;
 import com.example.springbootserver.models.User;
-import com.example.springbootserver.repositories.CourseRepository;
 import com.example.springbootserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
+
+    //EntityManagerFactory emf = Persistence.createEntityManagerFactory("eventQuery");
+    //EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager()
 
     @Autowired
     UserRepository repository;
@@ -43,13 +43,19 @@ public class UserService {
     public void updateUnvalidateFaculty(int userId){
         repository.updateUnvalidateFaculty(userId);
     }
+    public User findUserById(int userId){
+        return repository.findUserById(userId);
+
+    }
 
     public List<Event> findEventsForUser(int userId){
-        List<Object> list = repository.findEventsForUser(userId);
-        List<Event> events = new ArrayList<>();
-        for(Object event: list){
-            events.add((Event) event);
-        }
-        return  events;
+        List<String> eventIds = repository.findEventsIdsForUser(userId);
+        List<Event> events = repository.findEventsForUser(eventIds);
+        return events;
+
+    };
+
+    public List<String> findEventIdsForUser(int userId){
+        return repository.findEventsIdsForUser(userId);
     };
 }

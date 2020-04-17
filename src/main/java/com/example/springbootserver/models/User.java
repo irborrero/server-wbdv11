@@ -28,10 +28,10 @@ public class User {
     @JoinTable(name = "user_events",
             joinColumns = {
                     @JoinColumn(name = "user_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)},
+                            nullable = false, updatable = true)},
             inverseJoinColumns = {
                     @JoinColumn(name = "event_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)})
+                            nullable = false, updatable = true)})
     private Set<Event> events = new HashSet<>();
 
     public String getEmail() {
