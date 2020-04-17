@@ -23,6 +23,17 @@ public class EventController {
         return service.findAllEvents();
     }
 
+    @PostMapping("/api/courses/{courseId}/events")
+    public Event createEvent(@PathVariable("courseId") String courseId, @RequestBody Event newEvent) {
+        return service.createEvent(newEvent, courseId);
+    }
+
+    @GetMapping("/api/courses/{courseId}/events")
+    public List<Event> findEventsForCourse(@PathVariable("courseId") String courseId) {
+        return service.findEventsForCourse(courseId);
+    }
+
+
 //    @PostMapping("/api/events/")
 //    public void profile(HttpSession session, @RequestBody Event newEvent) {
 //        User profile = (User)session.getAttribute("profile");

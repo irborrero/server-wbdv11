@@ -11,7 +11,6 @@ import java.util.Set;
 @Table(name = "events")
 public class Event {
 
-
     @Id
     private String id;
 
@@ -20,6 +19,10 @@ public class Event {
     @JsonIgnore
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();;
+
+
+    @ManyToOne
+    private Course course;
 
     public String getId() {
         return id;
@@ -45,6 +48,11 @@ public class Event {
         this.users = user;
     }
 
+    public Course getCourse() {
+        return course;
+    }
 
-
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }
