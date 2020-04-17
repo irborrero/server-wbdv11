@@ -20,7 +20,7 @@ public class Discussion {
     private Topic topic;
 
     @ManyToOne
-    private  User user;
+    private User user;
 
     public Integer getId() {
         return id;

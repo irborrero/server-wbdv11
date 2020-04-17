@@ -20,6 +20,10 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Topic> topics;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "course")
+    private List<Event> events;
+
 
     public String getId() {
         return id;
@@ -51,6 +55,14 @@ public class Course {
 
     public void setTopics(List<Topic> topics) {
         this.topics = topics;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
 
