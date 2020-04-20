@@ -3,6 +3,7 @@ package com.example.springbootserver.controllers;
 import com.example.springbootserver.models.Course;
 import com.example.springbootserver.models.Event;
 import com.example.springbootserver.models.User;
+import com.example.springbootserver.repositories.EventRepository;
 import com.example.springbootserver.repositories.UserRepository;
 import com.example.springbootserver.services.CourseService;
 import com.example.springbootserver.services.EventService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +26,9 @@ public class UserController {
 
     @Autowired
     EventService eventService;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @PostMapping("api/register")
     public User register(
@@ -79,14 +84,16 @@ public class UserController {
 
     @PostMapping("api/users/events/")
     public List<String> saveEvent(HttpSession session, @RequestBody Event newEvent) {
-        try{
-           Event event = eventService.findEventById(newEvent.getId());
-            User profile = (User)session.getAttribute("profile");
-            User user = service.findUserById(profile.getId());
-            user.getEvents().add(newEvent);
-            service.save(user);
-            return service.findEventIdsForUser(profile.getId());
-        } catch (NullPointerException e){
+
+        Event event = eventService.findEventById(newEvent.getId());
+        if (event != null){
+                User profile = (User)session.getAttribute("profile");
+                User user = service.findUserById(profile.getId());
+                user.getEvents().add(newEvent);
+                service.save(user);
+                return service.findEventIdsForUser(profile.getId());
+
+        } else {
             User profile = (User)session.getAttribute("profile");
             eventService.insertEvent(newEvent);
             User user = service.findUserById(profile.getId());

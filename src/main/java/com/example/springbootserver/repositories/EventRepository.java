@@ -6,14 +6,16 @@ import com.example.springbootserver.models.Event;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
+
 public interface EventRepository
-        extends CrudRepository<Event, Integer> {
+        extends CrudRepository<Event, String> {
 
 //    @PersistenceContext
 //    EntityManager entityManager;
