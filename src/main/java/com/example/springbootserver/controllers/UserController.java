@@ -60,7 +60,7 @@ public class UserController {
             session.setAttribute("profile", currentUser);
             return currentUser ;
         } catch (java.lang.NullPointerException e){
-            return user;
+            return null;
         }
     }
     @GetMapping("api/users/faculty/validate")
