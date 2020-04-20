@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class EventService {
@@ -30,11 +31,19 @@ public class EventService {
     public Event createEvent(Event newEvent, String courseId) {
         Course course = courseRepository.findCourseById(courseId);
         newEvent.setCourse(course);
+        //Event attribute setup
+        String id = UUID.randomUUID().toString();
+        newEvent.setId(id);
+        newEvent.setOwner("INSTRUCTOR");
         return repository.save(newEvent);
     }
 
     public List<Event> findEventsForCourse(String courseId) {
         Course course = courseRepository.findCourseById(courseId);
         return course.getEvents();
+    }
+
+    public Event findEventById(String eventId) {
+        return repository.findEventById(eventId);
     }
 }
