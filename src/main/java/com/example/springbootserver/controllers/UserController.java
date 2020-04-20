@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     EventService eventService;
 
-    @PostMapping("/register")
+    @PostMapping("api/register")
     public User register(
             HttpSession session,
             @RequestBody User user) {
@@ -35,17 +35,21 @@ public class UserController {
         session.setAttribute("profile", newUser);
         return newUser;
     }
-    @PostMapping("/profile")
+    @PostMapping("api/profile")
     public User profile(HttpSession session) {
-        User profile = (User)session.getAttribute("profile");
-        profile.setPassword("***");
-        return profile;
+        try{
+            User profile = (User)session.getAttribute("profile");
+            profile.setPassword("***");
+            return profile;
+        } catch (NullPointerException e){
+            return null;
+        }
     }
-    @PostMapping("/logout")
+    @PostMapping("api/logout")
     public void logout(HttpSession session) {
         session.invalidate();
     }
-    @PostMapping("/login")
+    @PostMapping("api/login")
     public User login(
             HttpSession session,
             @RequestBody User user) {
@@ -59,21 +63,21 @@ public class UserController {
             return user;
         }
     }
-    @GetMapping("/users/faculty/validate")
+    @GetMapping("api/users/faculty/validate")
     public List<User> findUserToValidate() {
         return service.findUsersToValidate();
     }
-    @PutMapping("/users/faculty/validate/{userId}")
+    @PutMapping("api/users/faculty/validate/{userId}")
     public void updateValidateFaculty(@PathVariable("userId") int userId) {
         service.updateValidateFaculty(userId);
     }
-    @PutMapping("/users/faculty/unvalidate/{userId}")
+    @PutMapping("api/users/faculty/unvalidate/{userId}")
     public void updateUnvalidateFaculty(@PathVariable("userId") int userId) {
         service.updateUnvalidateFaculty(userId);
     }
 
 
-    @PostMapping("/users/events/")
+    @PostMapping("api/users/events/")
     public List<String> saveEvent(HttpSession session, @RequestBody Event newEvent) {
         User profile = (User)session.getAttribute("profile");
         eventService.insertEvent(newEvent);
@@ -83,18 +87,18 @@ public class UserController {
         return service.findEventIdsForUser(profile.getId());
     }
 
-    @GetMapping("/users/events/")
+    @GetMapping("api/users/events/")
     public List<Event> findEventsForUser(HttpSession session) {
         User profile = (User)session.getAttribute("profile");
         return  service.findEventsForUser(profile.getId());
     }
 
-    @GetMapping("/users/events/ids")
+    @GetMapping("api/users/events/ids")
     public List<String> findEventIdsForUser(HttpSession session) {
         User profile = (User)session.getAttribute("profile");
         return  service.findEventIdsForUser(profile.getId());
     }
-    @DeleteMapping("/users/events/")
+    @DeleteMapping("api/users/events/")
     public List<String> deleteEventsForUser(HttpSession session, @RequestBody Event deleteEvent) {
         User profile = (User)session.getAttribute("profile");
         User user = service.findUserById(profile.getId());
