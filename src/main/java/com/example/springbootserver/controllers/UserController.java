@@ -79,12 +79,21 @@ public class UserController {
 
     @PostMapping("api/users/events/")
     public List<String> saveEvent(HttpSession session, @RequestBody Event newEvent) {
-        User profile = (User)session.getAttribute("profile");
-        eventService.insertEvent(newEvent);
-        User user = service.findUserById(profile.getId());
-        user.getEvents().add(newEvent);
-        service.save(user);
-        return service.findEventIdsForUser(profile.getId());
+        try{
+           Event event = eventService.findEventById(newEvent.getId());
+            User profile = (User)session.getAttribute("profile");
+            User user = service.findUserById(profile.getId());
+            user.getEvents().add(newEvent);
+            service.save(user);
+            return service.findEventIdsForUser(profile.getId());
+        } catch (NullPointerException e){
+            User profile = (User)session.getAttribute("profile");
+            eventService.insertEvent(newEvent);
+            User user = service.findUserById(profile.getId());
+            user.getEvents().add(newEvent);
+            service.save(user);
+            return service.findEventIdsForUser(profile.getId());
+        }
     }
 
     @GetMapping("api/users/events/")

@@ -33,7 +33,10 @@ public class EventController {
         return service.findEventsForCourse(courseId);
     }
 
-
+    @GetMapping("/api/events/{eventId}")
+    public Event findEventsById(@PathVariable("eventId") String eventId) {
+        return service.findEventById(eventId);
+    }
 
 
 }

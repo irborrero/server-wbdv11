@@ -20,9 +20,16 @@ public class Event {
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();;
 
-
     @ManyToOne
     private Course course;
+
+    private String address;
+
+    private String start_time;
+
+    private String description;
+
+    private String owner;
 
     public String getId() {
         return id;
@@ -54,5 +61,37 @@ public class Event {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
     }
 }
