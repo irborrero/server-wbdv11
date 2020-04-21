@@ -3,6 +3,8 @@ package com.example.springbootserver.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "Discussions")
@@ -15,6 +17,8 @@ public class Discussion {
     private String title;
 
     private String body;
+
+    private LocalDateTime date;
 
     @ManyToOne
     private Topic topic;
@@ -60,5 +64,13 @@ public class Discussion {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }

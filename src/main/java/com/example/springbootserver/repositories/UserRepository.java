@@ -45,4 +45,7 @@ public interface UserRepository
 
     @Query("SELECT user FROM User user  WHERE user.id = :userId")
     public User findUserById(@Param("userId") int userId);
+
+    @Query("SELECT user FROM User user  WHERE user.id IN :userIds")
+    public List<User> findAllUsersForIdList(@Param("userIds") List<Integer> userIds);
 }
