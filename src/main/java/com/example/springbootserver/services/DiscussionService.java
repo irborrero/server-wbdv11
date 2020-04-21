@@ -30,9 +30,6 @@ public class DiscussionService {
         Topic topic = topicRepository.findTopicById(topicId);
         newDiscussion.setTopic(topic);
         newDiscussion.setUser(profile);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-        LocalDateTime now = LocalDateTime.now();
-
         newDiscussion.setDate(LocalDateTime.now());
         return discussionRepository.save(newDiscussion);
     }
