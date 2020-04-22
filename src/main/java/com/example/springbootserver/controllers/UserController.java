@@ -37,6 +37,20 @@ public class UserController {
         session.setAttribute("profile", newUser);
         return newUser;
     }
+    @PostMapping("api/users/save")
+    public User saveNewUserDetails(
+            HttpSession session,
+            @RequestBody User user) {
+        User currentuser = service.findUserById(user.getId());
+        currentuser.setLastName(user.getLastName());
+        currentuser.setName(user.getName());
+        currentuser.setEmail(user.getEmail());
+        User newUser = service.save(currentuser);
+        newUser.setPassword("***");
+        session.setAttribute("profile", newUser);
+        return newUser;
+    }
+
     @PostMapping("api/profile")
     public User profile(HttpSession session) {
         try{
