@@ -48,5 +48,9 @@ public class EventService {
         return repository.findEventById(eventId);
     }
 
+    public void deleteEvent(String eventId) {
+        repository.deleteById(eventId);
+    }
+
 
 }

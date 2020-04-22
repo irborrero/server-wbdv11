@@ -38,5 +38,10 @@ public class EventController {
         return service.findEventById(eventId);
     }
 
+    @DeleteMapping("/api/events/{eventId}")
+    public void deleteEvent(@PathVariable("eventId") String eventId) {
+        service.deleteEvent(eventId);
+    }
+
 
 }
