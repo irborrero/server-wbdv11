@@ -31,11 +31,19 @@ public class UserController {
     public User register(
             HttpSession session,
             @RequestBody User user) {
-        user.setValidated(Boolean.FALSE);
-        User newUser = service.save(user);
-        newUser.setPassword("***");
-        session.setAttribute("profile", newUser);
-        return newUser;
+
+        User checkuser = service.findUserByEmailAndName(user.getEmail(), user.getName());
+        if(checkuser != null){
+            return null;
+        } else {
+            user.setValidated(Boolean.FALSE);
+            User newUser = service.save(user);
+            newUser.setPassword("***");
+            session.setAttribute("profile", newUser);
+            return newUser;
+        }
+
+
     }
     @PostMapping("api/users/save")
     public User saveNewUserDetails(

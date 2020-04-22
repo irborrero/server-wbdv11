@@ -48,4 +48,7 @@ public interface UserRepository
 
     @Query("SELECT user FROM User user  WHERE user.id IN :userIds")
     public List<User> findAllUsersForIdList(@Param("userIds") List<Integer> userIds);
+
+    @Query("SELECT DISTINCT user FROM User user  WHERE user.email = :userEmail OR user.name = :userName")
+    public User findUserByEmailAndName(@Param("userEmail") String userEmail, @Param("userName") String userName);
 }

@@ -58,4 +58,8 @@ public class UserService {
     public List<String> findEventIdsForUser(int userId){
         return repository.findEventsIdsForUser(userId);
     };
+
+    public User findUserByEmailAndName(String email, String userName){
+        return repository.findUserByEmailAndName(email, userName);
+    }
 }
