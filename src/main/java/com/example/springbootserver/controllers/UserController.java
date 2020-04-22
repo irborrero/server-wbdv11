@@ -27,9 +27,6 @@ public class UserController {
     @Autowired
     EventService eventService;
 
-    @Autowired
-    EventRepository eventRepository;
-
     @PostMapping("api/register")
     public User register(
             HttpSession session,
@@ -121,5 +118,15 @@ public class UserController {
         user.getEvents().removeIf(event -> event.getId().equals(deleteEvent.getId()));
         service.save(user);
         return  service.findEventIdsForUser(profile.getId());
+    }
+
+    @GetMapping("api/users/{userId}")
+    public User findUserById(@PathVariable("userId") int userId){
+        User user = service.findUserById(userId);
+        user.setPassword("***");
+        user.getEvents().clear();
+        user.setLastName("***");
+        user.getDiscussions().clear();
+        return user;
     }
 }
